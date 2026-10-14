@@ -12,6 +12,6 @@ elif [ $marks -lt 60 ]; then
     echo "Second class"
 elif [ $marks -lt 80 ]; then 
     echo "First class"
-elif [ $marks -lt 100 ]; then 
+else
     echo "Distinction"
 fi
