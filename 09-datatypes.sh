@@ -5,5 +5,5 @@ var2=20
 
 echo "$var1+$var2"
 
-var3=30
-echo "$var1+$var2+$var3"
+var3=siva
+echo "$(($var1+$var2))"
