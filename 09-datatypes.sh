@@ -7,3 +7,6 @@ echo "$var1+$var2"
 
 var3=siva
 echo "$(($var1+$var2+$var3))"
+declare -i COUNT=30
+COUNT=COUNT+1
+echo "count is $COUNT"
