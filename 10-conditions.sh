@@ -2,7 +2,7 @@
 
 echo "Please enter marks"
 read  marks
-declare -i $marks
+declare -i marks
 
 if [ $marks -lt 30 ]; then 
     echo "Fail"
