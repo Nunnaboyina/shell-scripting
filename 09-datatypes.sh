@@ -4,3 +4,6 @@ var1=10
 var2=20
 
 echo "$var1+$var2"
+
+var3=30
+echo "$var1+$var2+$var3"
