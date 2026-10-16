@@ -24,11 +24,18 @@ validate(){
 
 }
 
-
 for package in $@
 do 
-    dnf install ${package} -y &>> $log_file
-    validate $? "${package} installing"
+    dnf list installed ${package} &>> $log_file
+    if [ $($?) -ne 0 ]; then
+        echo "Installing the ${package} package...."
+        dnf install ${package} -y &>> $log_file
+        validate $? "${package} installing"
+    else
+        echo "${package} is already installed ----SKIPPING" 
+    fi
+
+    
 done
 
 echo "Execution ended at $(date +"%F %T")" &>> $log_file
