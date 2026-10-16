@@ -21,21 +21,18 @@ validate(){
     else 
         echo "$2 is SUCCESS" | tee -a $log_file
     fi
-
 }
 
 for package in $@
 do 
-    dnf list installed ${package} &>> $log_file
-    if [ $? -ne 0 ]; then
-        echo "Installing the ${package} package...."
+    dnf list installed ${package} &>> $log_file  #### checking if we have already installed any packages
+    if [ $? -ne 0 ]; then  
+        echo "Installing the ${package} package...."      #### If not installing the package
         dnf install ${package} -y &>> $log_file
         validate $? "${package} installing"
     else
-        echo "${package} is already installed ----SKIPPING" 
-    fi
-
-    
+        echo "${package} is already installed ----SKIPPING"  ### If yes skipping the package
+    fi 
 done
 
 echo "Execution ended at $(date +"%F %T")" &>> $log_file
