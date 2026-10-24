@@ -19,7 +19,7 @@ fi
 
 # If directory exists
 if [ ! -d "$source_dir" ]; then
-    echo "${R}ERROR:: $source_dir does not exist${N}"
+    echo -e "${R}ERROR:: $source_dir does not exist ${N}"
     exit 1
 fi
 
@@ -31,7 +31,7 @@ if [ -z "$files_to_delete" ]; then
     exit 1
 fi
 
-while IFS=read -r line
+while IFS= read -r line
 do 
     echo "File is going to be deleted : $line"
     rm -f $line
