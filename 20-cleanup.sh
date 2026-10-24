@@ -10,6 +10,7 @@ days=${2:-14}
 
 usage(){
     echo "Provide command as :: $0 source_dir days_to_be_passed(optional)"
+    exit 1
 }
 # If source dir name is given
 if [ -z "$source_dir" ]; then 
