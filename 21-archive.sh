@@ -20,22 +20,22 @@ if [ -z "$source_dir" ] || [ -z "$destination_dir" ]; then
 fi
 
 if [ ! -d "$source_dir" ]; then
-    echo -e "${R}SOURCE_DIR:: $source_dir not found ${N}"
+    echo -e "${R}SOURCE_DIR:: $source_dir does not exist ${N}"
     exit 1
 fi
 
 if [ ! -d "$destination_dir" ]; then
-    echo -e "${R}DEST_DIR:: $destination_dir not found ${N}"
+    echo -e "${R}DEST_DIR:: $destination_dir does not exist ${N}"
     exit 1
 fi
 
-#echo "Scanning files which are 14 days older"
-#files_to_delete=$(find $source_dir -name "*.log" -type f -mtime +$days)
+echo "Scanning files which are 14 days older"
+files_to_archive=$(find $source_dir -name "*.log" -type f -mtime +$days)
 
-#if [ -z "$files_to_delete" ]; then
-#    echo "No files are found older than $days"
-#    exit 1
-#fi 
+if [ -z "$files_to_archive" ]; then
+    echo "No files are found older than $days"
+    exit 1
+fi 
 
 #tar -czvf logs_archive.tar.gz $files_to_delete
 
