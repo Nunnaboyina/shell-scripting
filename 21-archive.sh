@@ -37,7 +37,8 @@ if [ -z "$files_to_archive" ]; then
     exit 1
 fi 
 
-log_file="logs-$(date "+%F-%T").tar.gz"
+log_file="logs-$(date "+%Y-%m-%d-%H-%M-%s").tar.gz"
+echo "$log_file"
 tar -czvf $log_file $files_to_archive
 
 #echo "moving files to $destination_dir location"
