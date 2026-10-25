@@ -43,18 +43,16 @@ echo "$log_file"
 
 tar -czf $log_file $files_to_archive
 
-#echo "moving files to $destination_dir location"
-#mv logs_archive.tar.gz $destination_dir
 
-#if [ -z "$destination_dir" ]; then 
-#    echo "ERROR:: NO files added to $destination_dir"
-#    exit 1
-#else
-#    echo "deleting the files in $source_dir"
-#    while IFS= read -r line
-#    do
-#        echo "File is going to be deleted : $line"
-#        rm -f $line
-#        echo "File got deleted: $line"
-#    done <<< $logs_archive.tar.gz
-#fi    
+if [ $? -ne 0 ]; then 
+    echo -e "${R}ERROR:: Log Archival failed${N}"
+    exit 1
+else
+   echo "Logs are archived: $log_file "
+   while IFS= read -r line
+   do
+       echo "File is going to be deleted : $line"
+       rm -f $line
+       echo "File got deleted: $line"
+   done <<< "$files_to_archive"
+fi    
