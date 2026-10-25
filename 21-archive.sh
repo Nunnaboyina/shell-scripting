@@ -19,33 +19,38 @@ if [ -z "$source_dir" ] || [ -z "$destination_dir" ]; then
     usage
 fi
 
-if [ -d "$source_dir" ] || [ -d "$destination_dir" ]; then
-    echo -e "${R}ERROR:: $source_dir or $destination_dir not found ${N}"
+if [ ! -d "$source_dir" ]; then
+    echo -e "${R}SOURCE_DIR:: $source_dir not found ${N}"
     exit 1
 fi
 
-echo "Scanning files which are 14 days older"
-files_to_delete=$(find $source_dir -name "*.log" -type f -mtime +$days)
-
-if [ -z "$files_to_delete" ]; then
-    echo "No files are found older than $days"
+if [ ! -d "$destination_dir" ]; then
+    echo -e "${R}DEST_DIR:: $destination_dir not found ${N}"
     exit 1
-fi 
+fi
 
-tar -czvf logs_archive.tar.gz $files_to_delete
+#echo "Scanning files which are 14 days older"
+#files_to_delete=$(find $source_dir -name "*.log" -type f -mtime +$days)
 
-echo "moving files to $destination_dir location"
-mv logs_archive.tar.gz $destination_dir
+#if [ -z "$files_to_delete" ]; then
+#    echo "No files are found older than $days"
+#    exit 1
+#fi 
 
-if [ -z "$destination_dir" ]; then 
-    echo "ERROR:: NO files added to $destination_dir"
-    exit 1
-else
-    echo "deleting the files in $source_dir"
-    while IFS= read -r line
-    do
-        echo "File is going to be deleted : $line"
-        rm -f $line
-        echo "File got deleted: $line"
-    done <<< $logs_archive.tar.gz
-fi    
+#tar -czvf logs_archive.tar.gz $files_to_delete
+
+#echo "moving files to $destination_dir location"
+#mv logs_archive.tar.gz $destination_dir
+
+#if [ -z "$destination_dir" ]; then 
+#    echo "ERROR:: NO files added to $destination_dir"
+#    exit 1
+#else
+#    echo "deleting the files in $source_dir"
+#    while IFS= read -r line
+#    do
+#        echo "File is going to be deleted : $line"
+#        rm -f $line
+#        echo "File got deleted: $line"
+#    done <<< $logs_archive.tar.gz
+#fi    
