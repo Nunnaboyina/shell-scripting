@@ -37,7 +37,8 @@ if [ -z "$files_to_archive" ]; then
     exit 1
 fi 
 
-#tar -czvf logs_archive.tar.gz $files_to_delete
+log_file="logs-$(date "+%F-%T").tar.gz"
+tar -czvf $log_file $files_to_archive
 
 #echo "moving files to $destination_dir location"
 #mv logs_archive.tar.gz $destination_dir
