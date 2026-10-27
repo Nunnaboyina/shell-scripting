@@ -9,12 +9,11 @@ do
 usage=$(echo $line | awk '{print $6}' | cut -d "%" -f1)
 mount=$(echo $line | awk '{print $7}')
 if [ "$usage" -ge "$usage_threshold" ]; then
-    message+="High disk usage on $mount: $usage \n"
+    message+="High disk usage on $mount: $usage <br>"
 fi
-
 done <<< "$disk_usage"
 
-echo -e "$message"
+#echo -e "$message"
 
 sh mail.sh "Devops Team" "$server_ip" "High Disk Usage" "$message" "824bhavya@gmail.com" "Warning: High Disk usage alert"
 
