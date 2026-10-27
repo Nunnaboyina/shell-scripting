@@ -9,6 +9,8 @@ do
     usage=$(echo $line | awk '{print $6}' | cut -d "%" -f1)
     mount=$(echo $line | awk '{print $7}')
     if [ "$usage" -ge "$usage_threshold" ]; then
+    echo "$usage --- $usage_threshold"
+
         message+="High disk usage on $mount: $usage <br>"
     fi
 done <<< "$disk_usage"
