@@ -1,7 +1,6 @@
 #!/bin/bash
 
 disk_usage=$(df -hT | grep -v Filesystem)
-echo "$disk_usage"
 server_ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 usage_threshold=20
 
@@ -10,8 +9,6 @@ do
     usage=$(echo $line | awk '{print $6}' | cut -d "%" -f1)
     mount=$(echo $line | awk '{print $7}')
     if [ "$usage" -ge "$usage_threshold" ]; then
-    echo "$usage --- $usage_threshold"
-
         message+="High disk usage on $mount: $usage <br>"
     fi
 done <<< "$disk_usage"
